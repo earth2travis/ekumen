@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
 interface Message {
-  role: 'user' | 'assistant';
+  role: "user" | "assistant";
   content: string;
   timestamp: Date;
 }
@@ -18,18 +18,20 @@ export default function Home() {
 
   // Load conversation from localStorage on mount
   useEffect(() => {
-    const savedMessages = localStorage.getItem('farmaleaf-conversation');
+    const savedMessages = localStorage.getItem("farmaleaf-conversation");
     if (savedMessages) {
       try {
         const parsed = JSON.parse(savedMessages);
         // Convert timestamp strings back to Date objects
-        const messagesWithDates = parsed.map((msg: { role: string; content: string; timestamp: string }) => ({
-          ...msg,
-          timestamp: new Date(msg.timestamp)
-        }));
+        const messagesWithDates = parsed.map(
+          (msg: { role: string; content: string; timestamp: string }) => ({
+            ...msg,
+            timestamp: new Date(msg.timestamp),
+          })
+        );
         setMessages(messagesWithDates);
       } catch (error) {
-        console.error('Error loading saved conversation:', error);
+        console.error("Error loading saved conversation:", error);
       }
     }
   }, []);
@@ -37,13 +39,13 @@ export default function Home() {
   // Save conversation to localStorage whenever messages change
   useEffect(() => {
     if (messages.length > 0) {
-      localStorage.setItem('farmaleaf-conversation', JSON.stringify(messages));
+      localStorage.setItem("farmaleaf-conversation", JSON.stringify(messages));
     }
   }, [messages]);
 
   // Auto-scroll to bottom of conversation
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   // Limit conversation to last 20 messages (10 exchanges) for cost control
@@ -59,22 +61,22 @@ export default function Home() {
     if (!input.trim()) return;
 
     const userMessage: Message = {
-      role: 'user',
+      role: "user",
       content: input.trim(),
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
     // Add user message to conversation
     const updatedMessages = limitMessages([...messages, userMessage]);
     setMessages(updatedMessages);
-    setInput(''); // Clear input immediately
+    setInput(""); // Clear input immediately
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
+      const response = await fetch("/api/chat", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ messages: updatedMessages }),
       });
@@ -84,23 +86,24 @@ export default function Home() {
       }
 
       const data = await response.json();
-      
+
       const assistantMessage: Message = {
-        role: 'assistant',
+        role: "assistant",
         content: data.error ? `Error: ${data.error}` : data.response,
-        timestamp: new Date()
+        timestamp: new Date(),
       };
 
       // Add assistant response to conversation
-      setMessages(prev => limitMessages([...prev, assistantMessage]));
+      setMessages((prev) => limitMessages([...prev, assistantMessage]));
     } catch (error) {
-      console.error('Error calling API:', error);
+      console.error("Error calling API:", error);
       const errorMessage: Message = {
-        role: 'assistant',
-        content: 'Sorry, there was an error processing your request. Please try again.',
-        timestamp: new Date()
+        role: "assistant",
+        content:
+          "Sorry, there was an error processing your request. Please try again.",
+        timestamp: new Date(),
       };
-      setMessages(prev => limitMessages([...prev, errorMessage]));
+      setMessages((prev) => limitMessages([...prev, errorMessage]));
     } finally {
       setIsLoading(false);
     }
@@ -109,7 +112,7 @@ export default function Home() {
   const handleClear = () => {
     setInput("");
     setMessages([]);
-    localStorage.removeItem('farmaleaf-conversation');
+    localStorage.removeItem("farmaleaf-conversation");
   };
 
   return (
@@ -124,28 +127,32 @@ export default function Home() {
               <div
                 key={index}
                 className={`p-3 rounded-md ${
-                  message.role === 'user' 
-                    ? 'bg-black text-white ml-8' 
-                    : 'bg-gray-100 text-black mr-8'
+                  message.role === "user"
+                    ? "bg-black text-white ml-8"
+                    : "bg-gray-100 text-black mr-8"
                 }`}
               >
                 <div className="flex justify-between items-start mb-1">
                   <span className="text-sm font-semibold">
-                    {message.role === 'user' ? 'You' : 'Farmaleaf'}
+                    {message.role === "user" ? "You" : "Yebá"}
                   </span>
                   <span className="text-xs opacity-70">
                     {message.timestamp.toLocaleTimeString()}
                   </span>
                 </div>
-                <pre className="whitespace-pre-wrap text-sm">{message.content}</pre>
+                <pre className="whitespace-pre-wrap text-sm">
+                  {message.content}
+                </pre>
               </div>
             ))}
             {isLoading && (
               <div className="bg-gray-100 text-black mr-8 p-3 rounded-md">
                 <div className="flex justify-between items-start mb-1">
-                  <span className="text-sm font-semibold">Farmaleaf</span>
+                  <span className="text-sm font-semibold">Yebá</span>
                 </div>
-                <div className="text-sm">Thinking...</div>
+                <div className="text-sm">
+                  Searching through the ancient wisdom...
+                </div>
               </div>
             )}
             <div ref={messagesEndRef} />
@@ -156,7 +163,7 @@ export default function Home() {
           <Textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask Farmaleaf..."
+            placeholder="Tell Yebá what ails you..."
             className="min-h-[100px] bg-white border-black text-black resize-none"
             disabled={isLoading}
           />
