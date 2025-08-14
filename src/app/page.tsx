@@ -137,7 +137,11 @@ export default function Home() {
                     {message.role === "user" ? "You" : "Yebá"}
                   </span>
                   <span className="text-xs opacity-70">
-                    {message.timestamp.toLocaleTimeString()}
+                    {message.timestamp.toLocaleTimeString([], {
+                      hour12: false,
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
                   </span>
                 </div>
                 <pre className="whitespace-pre-wrap text-sm">
