@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import OpenAI from 'openai'
+import { getSystemPrompt } from '@/lib/prompts'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -17,11 +18,17 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'OpenAI API key not configured' }, { status: 500 })
     }
 
+    // Get system prompt
+    const systemPrompt = await getSystemPrompt()
+
     // Convert our message format to OpenAI format (remove timestamp)
-    const openaiMessages = messages.map(msg => ({
-      role: msg.role,
-      content: msg.content
-    }))
+    const openaiMessages = [
+      { role: 'system' as const, content: systemPrompt },
+      ...messages.map(msg => ({
+        role: msg.role,
+        content: msg.content
+      }))
+    ]
 
     const completion = await openai.chat.completions.create({
       messages: openaiMessages,

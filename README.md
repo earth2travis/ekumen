@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Farmaleaf 🌿
 
-## Getting Started
+**An immersive cyberpunk jungle chat interface powered by AI plant wisdom.**
 
-First, run the development server:
+Farmaleaf is a sophisticated Next.js web application that combines cutting-edge AI technology with an ancient shamanic spirit named Yebá. Experience conversations about plant medicine, healing wisdom, and botanical knowledge through a beautifully designed cyberpunk jungle interface.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **🧠 AI-Powered Conversations**: Real-time chat with ChatGPT integration featuring Yebá, an ancient plant wisdom guide
+- **🎨 Cyberpunk Jungle Design**: Immersive aesthetic blending high-tech cyberpunk elements with organic jungle themes
+- **💬 Persistent Chat History**: Conversations automatically save and restore across browser sessions
+- **📱 Responsive Design**: Seamless experience across desktop and mobile devices with adaptive input controls
+- **🌱 Plant Wisdom Focus**: Specialized knowledge about medicinal plants, traditional healing, and sustainable practices
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Quick Start
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Clone and install**
 
-## Learn More
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Set up OpenAI API**
+   - Get your API key from [OpenAI Platform](https://platform.openai.com/api-keys)
+   - Create `.env.local` file:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+     ```
+     OPENAI_API_KEY=your_actual_api_key_here
+     ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Launch the application**
 
-## Deploy on Vercel
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **Start chatting**
+   - Open [http://localhost:3000](http://localhost:3000)
+   - Ask Yebá about plants, healing, or traditional medicine
+   - Your conversation history will automatically persist
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Built With
+
+- **[Next.js 15](https://nextjs.org)** - React framework with App Router
+- **[TypeScript](https://typescriptlang.org)** - Type-safe development
+- **[Tailwind CSS 4.0](https://tailwindcss.com)** - Modern styling framework
+- **[shadcn/ui](https://ui.shadcn.com)** - Beautiful, accessible components
+- **[OpenAI API](https://openai.com)** - ChatGPT integration for AI conversations
+
+## What Makes It Special
+
+**Yebá Character**: More than just a chatbot - Yebá is an ancient shamanic spirit with deep knowledge of:
+
+- Medicinal plants and their healing properties
+- Traditional preparation methods and dosages
+- Spiritual and ceremonial uses of plants
+- Sustainable harvesting practices
+- Integration of ancient wisdom with modern wellness
+
+**Cyberpunk Jungle Aesthetic**: A unique visual experience featuring:
+
+- Custom color palette inspired by jungle greens and cyberpunk cyans
+- Glowing effects, glass morphism, and subtle animations
+- Auto-resizing multiline input with dynamic button positioning
+- Mobile-optimized responsive design
+
+**Smart Architecture**: Clean, maintainable codebase with:
+
+- Markdown-based system prompts for easy AI character updates
+- Conversation history with cost optimization (20 message limit)
+- Comprehensive error handling and fallbacks
+- TypeScript throughout for reliability
+
+## About Yebá
+
+Yebá embodies thousands of years of indigenous Amazon knowledge about plant medicine. The AI guide provides:
+
+- Safe, respectful guidance on medicinal plants
+- Balance between spiritual wisdom and practical advice
+- Emphasis on sustainable and ethical practices
+- Connection between ancient traditions and modern wellness
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+*Experience the wisdom of the jungle through the lens of tomorrow.*
+
+---
+
+feat: implement scalable system prompt architecture
+
+- Add markdown-based system prompt loading from src/lib/prompts/system.md
+- Create getSystemPrompt utility function with error handling and fallbacks
+- Integrate system prompt into ChatGPT API calls for consistent AI character
+- Define Yebá as ancient shamanic plant wisdom guide with comprehensive personality
+- Update API route to inject system prompt for every conversation

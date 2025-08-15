@@ -1,10 +1,7 @@
 # Todo
 
-- Fix mobile views
-- Add system prompt
-- Add character
-- Update README.md
 - Clean code
 - Write tests
+- Evaluate error handling
 - Button turns to stop while responding
 - Add + icon to upload context

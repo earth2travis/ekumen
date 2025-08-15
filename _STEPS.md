@@ -534,6 +534,117 @@ if (textareaRef.current) {
 
 These optimizations ensure the chat interface works flawlessly on both desktop and mobile devices while maintaining the application's sophisticated cyberpunk jungle aesthetic.
 
+## 14. System Prompt Implementation
+
+Implemented a clean, scalable system prompt architecture that loads Yebá's personality and knowledge from a markdown file, following Next.js best practices for maintainable AI character definitions.
+
+### Architecture Overview
+
+**File Structure:**
+
+```
+src/
+  lib/
+    prompts/
+      system.md          # Yebá system prompt definition
+    prompts.ts           # Utility function to load prompts
+  app/
+    api/
+      chat/
+        route.ts         # Updated to use system prompt
+```
+
+**System Prompt Definition (`src/lib/prompts/system.md`):**
+
+Created a comprehensive character definition for Yebá as an ancient shamanic plant wisdom guide with:
+
+- **Character Background**: Ancient Amazon spirit with thousands of years of indigenous plant knowledge
+- **Personality Traits**: Wise but approachable, poetic yet practical, respectful of sacred traditions
+- **Knowledge Domains**: Medicinal plants, traditional preparation methods, spiritual ceremonies, sustainable practices
+- **Communication Guidelines**: Emphasis on safety, respect for indigenous traditions, balance of spiritual and practical advice
+
+**Utility Function (`src/lib/prompts.ts`):**
+
+```typescript
+export async function getSystemPrompt(): Promise<string> {
+  try {
+    const promptPath = path.join(process.cwd(), 'src/lib/prompts/system.md')
+    const content = await fs.readFile(promptPath, 'utf-8')
+    return content
+  } catch (error) {
+    console.error('Failed to load system prompt:', error)
+    return 'You are a helpful AI assistant.'
+  }
+}
+```
+
+**API Integration (`src/app/api/chat/route.ts`):**
+
+Enhanced the chat endpoint to dynamically load and inject the system prompt:
+
+```typescript
+// Get system prompt
+const systemPrompt = await getSystemPrompt()
+
+// Convert our message format to OpenAI format with system prompt
+const openaiMessages = [
+  { role: 'system' as const, content: systemPrompt },
+  ...messages.map(msg => ({
+    role: msg.role,
+    content: msg.content
+  }))
+]
+```
+
+### Key Benefits
+
+**Maintainability:**
+
+- System prompts can be updated without code changes
+- Markdown format allows for rich formatting and easy editing
+- Clean separation between prompt content and application logic
+
+**Scalability:**
+
+- Framework supports multiple prompt files for different AI characters
+- Easy to A/B test different prompt variations
+- Modular structure allows for prompt versioning and rollbacks
+
+**Best Practices:**
+
+- Follows Next.js file organization conventions
+- Proper error handling with fallback prompt
+- Type-safe implementation with TypeScript
+- Server-side prompt loading for security
+
+**Character Consistency:**
+
+- All conversations now begin with Yebá's full personality context
+- Consistent voice and knowledge base across sessions  
+- Proper integration with existing cyberpunk jungle aesthetic
+
+### Technical Implementation Details
+
+**Error Handling:**
+
+- Graceful fallback to generic assistant prompt if markdown file fails to load
+- Console error logging for debugging while maintaining user experience
+- File system error protection prevents application crashes
+
+**Performance:**
+
+- Prompt loaded once per API request (could be optimized with caching if needed)
+- Minimal overhead from file system reads
+- Clean async/await pattern for non-blocking execution
+
+**Security:**
+
+- Server-side prompt loading prevents client-side prompt exposure
+- No sensitive information stored in prompts
+- Standard Next.js security practices maintained
+
+This implementation creates a professional, maintainable system for AI character definition that enhances the user experience while following industry best practices for LLM applications.
+
 ## Usage Instructions
 
 1. Install dependencies: `npm install`
@@ -557,19 +668,6 @@ To use a different OpenAI model, update the API route:
 const completion = await openai.chat.completions.create({
   messages: [{ role: 'user', content: message }],
   model: 'gpt-4', // or 'gpt-4-turbo', etc.
-})
-```
-
-**Add System Prompts:**
-To customize the AI's behavior, add a system message:
-
-```typescript
-const completion = await openai.chat.completions.create({
-  messages: [
-    { role: 'system', content: 'You are a helpful assistant specialized in agriculture.' },
-    { role: 'user', content: message }
-  ],
-  model: 'gpt-3.5-turbo',
 })
 ```
 
