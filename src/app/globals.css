@@ -364,4 +364,11 @@
             drop-shadow(0 0 60px #23F0C7) 
             brightness(1.2) !important;
   }
+
+  /* Mobile-specific placeholder text size */
+  @media (max-width: 768px) {
+    textarea::placeholder {
+      font-size: 12px;
+    }
+  }
 }

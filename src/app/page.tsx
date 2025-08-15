@@ -18,7 +18,6 @@ export default function Home() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isMultiline, setIsMultiline] = useState(false);
-  const [textareaHeight, setTextareaHeight] = useState(56);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -58,7 +57,10 @@ export default function Home() {
   const autoResize = () => {
     if (!textareaRef.current) return;
 
-    textareaRef.current.style.height = "auto";
+    // Reset to single line height first
+    textareaRef.current.style.height = "56px";
+
+    // Check if content overflows the single line
     const scrollHeight = textareaRef.current.scrollHeight;
     const isMulti = scrollHeight > 56;
 
@@ -89,7 +91,12 @@ export default function Home() {
     setMessages(updatedMessages);
     setInput(""); // Clear input immediately
     setIsMultiline(false); // Reset multiline state
-    setTextareaHeight(56); // Reset textarea height
+
+    // Reset textarea height
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "56px";
+    }
+
     setIsLoading(true);
 
     try {
@@ -133,7 +140,6 @@ export default function Home() {
     setInput("");
     setMessages([]);
     setIsMultiline(false);
-    setTextareaHeight(56);
     localStorage.removeItem("farmaleaf-conversation");
   };
 
@@ -262,19 +268,11 @@ export default function Home() {
                 />
 
                 <div
-                  className="absolute transition-all duration-300"
-                  style={
+                  className={`absolute transition-all duration-300 ${
                     isMultiline
-                      ? {
-                          bottom: "16px",
-                          right: "16px",
-                        }
-                      : {
-                          top: "50%",
-                          right: "8px",
-                          transform: "translateY(-50%)",
-                        }
-                  }
+                      ? "-bottom-1 right-2"
+                      : "top-1/2 right-2 -translate-y-1/2"
+                  }`}
                 >
                   <Button
                     type="button"
@@ -283,6 +281,7 @@ export default function Home() {
                       e.stopPropagation();
                       const formEvent = e as unknown as React.FormEvent;
                       handleSubmit(formEvent);
+                      e.currentTarget.blur();
                     }}
                     disabled={isLoading || !input.trim()}
                     variant="logoButton"

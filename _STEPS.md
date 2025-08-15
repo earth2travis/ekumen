@@ -1,8 +1,8 @@
-# Project Setup Steps
+# Project Steps
 
 ## Overview
 
-Next.js application with Tailwind CSS and shadcn/ui components featuring a simple black and white LLM interface.
+Next.js application with shadcn/ui components and Tailwind CSS featuring a simple LLM interface.
 
 ## Technologies
 
@@ -448,6 +448,92 @@ The chat interface now features an intelligent auto-resizing textarea with dynam
 
 This enhancement provides a modern, responsive input experience similar to popular chat applications while maintaining the application's unique design aesthetic.
 
+## 13. Mobile Optimization and Button State Management
+
+Enhanced the chat interface with mobile-specific improvements and proper button state management for a better user experience across all devices.
+
+### Mobile-Specific Improvements
+
+**Responsive Placeholder Text:**
+
+- Added CSS media query to reduce placeholder text size to 12px on mobile devices (max-width: 768px)
+- Improves readability and visual hierarchy on smaller screens
+
+**Mobile Multiline Detection:**
+
+- Adjusted multiline detection threshold for mobile devices
+- Input field expands appropriately when text reaches two lines on mobile
+- Prevents premature expansion while ensuring proper expansion when needed
+
+**Button Positioning Refinements:**
+
+- Fine-tuned button positioning using `-bottom-1` (4px below container edge)
+- Ensures button appears properly below text content on all screen sizes
+- Maintains visual connection to input field while providing clear separation from text
+
+### Button State Management
+
+**Post-Submit State Reset:**
+
+- Implemented proper button state reset after message submission
+- Button returns to inactive state immediately after sending
+- Textarea automatically resets to default single-line height (56px)
+- Clean state management prevents visual inconsistencies
+
+**Cross-Platform Focus Handling:**
+
+- Added `e.currentTarget.blur()` to remove button focus after click
+- Handles mobile Safari's unique focus behavior patterns
+- Maintains consistent user experience across desktop and mobile browsers
+
+### Technical Implementation
+
+**Auto-Resize Function:**
+
+```typescript
+const autoResize = () => {
+  if (!textareaRef.current) return;
+  
+  textareaRef.current.style.height = 'auto';
+  const scrollHeight = textareaRef.current.scrollHeight;
+  const isMulti = scrollHeight > 56;
+  
+  setIsMultiline(isMulti);
+  textareaRef.current.style.height = scrollHeight + (isMulti ? 60 : 0) + 'px';
+};
+```
+
+**Button Reset Logic:**
+
+```typescript
+// In handleSubmit function
+setInput(""); 
+setIsMultiline(false);
+if (textareaRef.current) {
+  textareaRef.current.style.height = "56px";
+}
+```
+
+**Mobile CSS Enhancement:**
+
+```css
+@media (max-width: 768px) {
+  textarea::placeholder {
+    font-size: 12px;
+  }
+}
+```
+
+### User Experience Improvements
+
+- Seamless transition between single-line and multiline input modes
+- Proper button positioning that adapts to content length
+- Consistent behavior across all device types and screen sizes
+- Clean state management that resets interface after each message
+- Optimal text sizing for mobile readability
+
+These optimizations ensure the chat interface works flawlessly on both desktop and mobile devices while maintaining the application's sophisticated cyberpunk jungle aesthetic.
+
 ## Usage Instructions
 
 1. Install dependencies: `npm install`
@@ -496,15 +582,3 @@ The application includes comprehensive error handling for:
 - OpenAI API errors
 - Invalid requests
 - Rate limiting
-
-feat: implement auto-resizing multiline textarea with dynamic button positioning
-
-- Add auto-expanding textarea that grows/shrinks based on content
-- Implement dynamic button positioning (center-right for single line, bottom-right for multiline)
-- Add multiline detection based on content height and line breaks
-- Create smooth transitions between single-line and multiline modes
-- Ensure button stays within textarea boundaries at all times
-- Add proper padding adjustments to prevent text overlap with button
-- Implement real-time resize on text input/deletion
-- Remove scrollbars in favor of natural textarea expansion
-- Set max height limit with overflow handling for very long content
