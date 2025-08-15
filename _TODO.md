@@ -1,8 +1,5 @@
 # Todo
 
-- Implement Metadata and OG images
-- Update title
-- Add Favicon
 - Clean code
 - Write tests
 - Evaluate error handling

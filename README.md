@@ -87,13 +87,3 @@ This project is open source and available under the [MIT License](LICENSE).
 ---
 
 *Experience the wisdom of the jungle through the lens of tomorrow.*
-
----
-
-feat: implement scalable system prompt architecture
-
-- Add markdown-based system prompt loading from src/lib/prompts/system.md
-- Create getSystemPrompt utility function with error handling and fallbacks
-- Integrate system prompt into ChatGPT API calls for consistent AI character
-- Define Yebá as ancient shamanic plant wisdom guide with comprehensive personality
-- Update API route to inject system prompt for every conversation
