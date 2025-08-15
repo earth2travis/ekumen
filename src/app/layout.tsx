@@ -23,11 +23,11 @@ export const metadata: Metadata = {
     template: "%s | Farmaleaf"
   },
   description: "Connect with Yebá, the ancient healing spirit, for personalized guidance on natural remedies, traditional medicine, and holistic wellness practices.",
-  metadataBase: new URL("https://farmaleaf.com"),
+  metadataBase: new URL("https://farmaleaf-chat.vercel.app"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://farmaleaf.com",
+    url: "https://farmaleaf-chat.vercel.app",
     title: "Farmaleaf | Ancient Wisdom for Modern Healing",
     description: "Connect with Yebá, the ancient healing spirit, for personalized guidance on natural remedies, traditional medicine, and holistic wellness practices.",
     siteName: "Farmaleaf",
