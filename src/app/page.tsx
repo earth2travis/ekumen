@@ -3,6 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent } from "@/components/ui/card";
+import Image from "next/image";
+import { Cross1Icon } from "@radix-ui/react-icons";
 
 interface Message {
   role: "user" | "assistant";
@@ -116,82 +119,152 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-black p-4">
+    <div className="min-h-screen bg-background text-foreground p-4 cyber-scanlines">
       <div className="max-w-2xl mx-auto space-y-6">
-        <h1 className="text-2xl font-bold text-center mb-8">Farmaleaf</h1>
+        <div className="flex justify-start mb-8 pt-4">
+          <Image
+            src="/images/combination-mark.svg"
+            alt="Farmaleaf"
+            width={200}
+            height={80}
+          />
+        </div>
 
         {/* Conversation History */}
         {messages.length > 0 && (
-          <div className="mb-8 space-y-4 max-h-96 overflow-y-auto border border-black rounded-md p-4">
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`p-3 rounded-md ${
-                  message.role === "user"
-                    ? "bg-black text-white ml-8"
-                    : "bg-gray-100 text-black mr-8"
-                }`}
-              >
-                <div className="flex justify-between items-start mb-1">
-                  <span className="text-sm font-semibold">
-                    {message.role === "user" ? "You" : "Yebá"}
-                  </span>
-                  <span className="text-xs opacity-70">
-                    {message.timestamp.toLocaleTimeString([], {
-                      hour12: false,
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </span>
+          <Card className="mb-8 cyber-glass">
+            <CardContent className="space-y-4 max-h-[60vh] overflow-y-auto cyber-scrollbar p-4">
+              {messages.map((message, index) => (
+                <div
+                  key={index}
+                  className={`${
+                    message.role === "user" ? "flex justify-end ml-8" : "mr-8"
+                  }`}
+                >
+                  {message.role === "assistant" && (
+                    <div className="flex justify-start items-center gap-2 mb-1">
+                      <span className="text-sm font-semibold cyber-heading text-xs">
+                        Yebá
+                      </span>
+                      <span className="text-xs opacity-70 font-mono">
+                        {message.timestamp.toLocaleTimeString([], {
+                          hour12: false,
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </span>
+                    </div>
+                  )}
+                  <div
+                    className={`${
+                      message.role === "user"
+                        ? "cyber-message-user"
+                        : "cyber-message-yeba cyber-glass"
+                    }`}
+                  >
+                    <pre
+                      className={`whitespace-pre-wrap text-sm ${
+                        message.role === "user"
+                          ? "text-right text-background"
+                          : "cyber-text"
+                      }`}
+                    >
+                      {message.content}
+                    </pre>
+                  </div>
                 </div>
-                <pre className="whitespace-pre-wrap text-sm">
-                  {message.content}
-                </pre>
+              ))}
+              {isLoading && (
+                <div className="mr-8">
+                  <div className="flex justify-start items-center gap-2 mb-1">
+                    <span className="text-sm font-semibold cyber-heading text-xs">
+                      Yebá
+                    </span>
+                  </div>
+                  <div className="cyber-message-yeba cyber-glass cyber-pulse">
+                    <pre className="whitespace-pre-wrap text-sm cyber-text">
+                      Searching through the ancient wisdom...
+                    </pre>
+                  </div>
+                </div>
+              )}
+              <div ref={messagesEndRef} />
+              <div className="flex justify-end pt-2">
+                <Button
+                  type="button"
+                  onClick={handleClear}
+                  variant="outline"
+                  size="sm"
+                  disabled={messages.length === 0}
+                >
+                  <Cross1Icon className="w-4 h-4" />
+                </Button>
               </div>
-            ))}
-            {isLoading && (
-              <div className="bg-gray-100 text-black mr-8 p-3 rounded-md">
-                <div className="flex justify-between items-start mb-1">
-                  <span className="text-sm font-semibold">Yebá</span>
-                </div>
-                <div className="text-sm">
-                  Searching through the ancient wisdom...
-                </div>
-              </div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
+            </CardContent>
+          </Card>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <Textarea
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Tell Yebá what ails you..."
-            className="min-h-[100px] bg-white border-black text-black resize-none"
-            disabled={isLoading}
-          />
+        <Card className="cyber-glass">
+          <CardContent className="p-6">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="relative">
+                <Textarea
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      if (!isLoading && input.trim()) {
+                        const formEvent = e as unknown as React.FormEvent;
+                        handleSubmit(formEvent);
+                      }
+                    }
+                  }}
+                  placeholder="Tell Yebá what ails you..."
+                  className="min-h-[56px] max-h-[200px] pr-12 resize-none flex items-center placeholder-centered"
+                  style={{
+                    paddingTop: "16px",
+                    paddingBottom: "16px",
+                    lineHeight: "1.3",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                  disabled={isLoading}
+                  rows={1}
+                />
 
-          <div className="flex gap-2">
-            <Button
-              type="submit"
-              disabled={isLoading || !input.trim()}
-              className="bg-black text-white hover:bg-gray-800"
-            >
-              {isLoading ? "Sending..." : "Send"}
-            </Button>
-
-            <Button
-              type="button"
-              onClick={handleClear}
-              variant="outline"
-              className="border-black text-black hover:bg-gray-100"
-              disabled={messages.length === 0}
-            >
-              Clear
-            </Button>
-          </div>
-        </form>
+                <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
+                  <Button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      const formEvent = e as unknown as React.FormEvent;
+                      handleSubmit(formEvent);
+                    }}
+                    disabled={isLoading || !input.trim()}
+                    variant="logoButton"
+                    size="icon"
+                    className="h-16 w-16 flex items-center justify-center logo-super-glow transition-all duration-300"
+                  >
+                    <Image
+                      src="/images/logo.svg"
+                      alt="Send"
+                      width={88}
+                      height={88}
+                      className="w-20 h-20"
+                      style={{
+                        filter:
+                          "brightness(0) saturate(100%) invert(70%) sepia(77%) saturate(2494%) hue-rotate(118deg) brightness(94%) contrast(101%)",
+                        fontWeight: "bold",
+                      }}
+                    />
+                  </Button>
+                </div>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

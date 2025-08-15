@@ -8,6 +8,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-jetbrains: var(--font-jetbrains-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -45,37 +46,37 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #ffffff;
-  --foreground: #000000;
-  --card: #ffffff;
-  --card-foreground: #000000;
-  --popover: #ffffff;
-  --popover-foreground: #000000;
-  --primary: #000000;
-  --primary-foreground: #ffffff;
-  --secondary: #f5f5f5;
-  --secondary-foreground: #000000;
-  --muted: #f5f5f5;
-  --muted-foreground: #666666;
-  --accent: #f5f5f5;
-  --accent-foreground: #000000;
+  --background: #1F2421;
+  --foreground: #EEE5E9;
+  --card: #1F2421;
+  --card-foreground: #EEE5E9;
+  --popover: #1F2421;
+  --popover-foreground: #EEE5E9;
+  --primary: #216870;
+  --primary-foreground: #EEE5E9;
+  --secondary: #216869;
+  --secondary-foreground: #EEE5E9;
+  --muted: #216869;
+  --muted-foreground: #EEE5E9;
+  --accent: #49A078;
+  --accent-foreground: #EEE5E9;
   --destructive: #ef4444;
-  --border: #000000;
-  --input: #ffffff;
-  --ring: #000000;
-  --chart-1: #666666;
-  --chart-2: #999999;
-  --chart-3: #cccccc;
-  --chart-4: #333333;
-  --chart-5: #555555;
-  --sidebar: #ffffff;
-  --sidebar-foreground: #000000;
-  --sidebar-primary: #000000;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f5f5f5;
-  --sidebar-accent-foreground: #000000;
-  --sidebar-border: #000000;
-  --sidebar-ring: #000000;
+  --border: #216869;
+  --input: #1F2421;
+  --ring: #216870;
+  --chart-1: #216870;
+  --chart-2: #216869;
+  --chart-3: #49A078;
+  --chart-4: #1F2421;
+  --chart-5: #EEE5E9;
+  --sidebar: #1F2421;
+  --sidebar-foreground: #EEE5E9;
+  --sidebar-primary: #216870;
+  --sidebar-primary-foreground: #EEE5E9;
+  --sidebar-accent: #216869;
+  --sidebar-accent-foreground: #EEE5E9;
+  --sidebar-border: #216869;
+  --sidebar-ring: #216870;
 }
 
 .dark {
@@ -118,5 +119,249 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image: 
+      radial-gradient(circle at 20% 80%, rgba(73, 160, 120, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(33, 104, 112, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(33, 104, 105, 0.03) 0%, transparent 50%);
+  }
+}
+
+@layer utilities {
+  /* Cyberpunk glow effects */
+  .cyber-glow-primary {
+    box-shadow: 0 0 10px rgba(33, 104, 112, 0.5), inset 0 0 10px rgba(33, 104, 112, 0.1);
+  }
+  
+  .cyber-glow-accent {
+    box-shadow: 0 0 15px rgba(73, 160, 120, 0.6), inset 0 0 15px rgba(73, 160, 120, 0.1);
+  }
+
+  .cyber-border {
+    border: 1px solid rgba(33, 104, 105, 0.8);
+    box-shadow: 
+      0 0 5px rgba(33, 104, 105, 0.3),
+      inset 0 0 5px rgba(33, 104, 105, 0.1);
+  }
+
+  /* Gradient backgrounds */
+  .cyber-gradient-primary {
+    background: linear-gradient(135deg, #216870 0%, #216869 100%);
+  }
+
+  .cyber-gradient-accent {
+    background: linear-gradient(135deg, #49A078 0%, #216870 100%);
+  }
+
+  /* Cyberpunk corner accents */
+  .cyber-corners::before,
+  .cyber-corners::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #49A078;
+    z-index: 10;
+  }
+
+  .cyber-corners::before {
+    top: 8px;
+    left: 8px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .cyber-corners::after {
+    bottom: 8px;
+    right: 8px;
+    border-left: none;
+    border-top: none;
+  }
+
+  /* Pulsing animation */
+  .cyber-pulse {
+    animation: cyber-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes cyber-pulse {
+    0%, 100% {
+      box-shadow: 0 0 5px rgba(33, 104, 112, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(33, 104, 112, 0.8), 0 0 30px rgba(73, 160, 120, 0.4);
+    }
+  }
+
+  /* Breathing effect for interactive elements */
+  .cyber-breathe {
+    animation: cyber-breathe 3s ease-in-out infinite;
+  }
+
+  @keyframes cyber-breathe {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.9;
+    }
+    50% {
+      transform: scale(1.02);
+      opacity: 1;
+    }
+  }
+
+  /* Custom scrollbar */
+  .cyber-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .cyber-scrollbar::-webkit-scrollbar-track {
+    background: #1F2421;
+  }
+
+  .cyber-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #216870, #216869);
+    border-radius: 4px;
+  }
+
+  .cyber-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #49A078, #216870);
+  }
+
+  /* Typography utilities */
+  .cyber-heading {
+    font-family: var(--font-jetbrains-mono);
+    color: #49A078;
+    text-shadow: 0 0 10px rgba(73, 160, 120, 0.5);
+  }
+
+  .cyber-text {
+    color: #EEE5E9;
+    text-shadow: 0 0 5px rgba(238, 229, 233, 0.3);
+  }
+
+  /* Message bubble styles */
+  .cyber-message {
+    position: relative;
+    background: linear-gradient(135deg, rgba(31, 36, 33, 0.9) 0%, rgba(33, 104, 105, 0.3) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(33, 104, 105, 0.6);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 
+      0 0 20px rgba(33, 104, 112, 0.2),
+      inset 0 0 20px rgba(73, 160, 120, 0.05);
+  }
+
+  /* User message with solid jungle green background */
+  .cyber-message-user {
+    position: relative;
+    background: rgba(73, 160, 120, 0.7);
+    border: 1px solid #49A078;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 
+      0 0 20px rgba(73, 160, 120, 0.4),
+      inset 0 0 20px rgba(73, 160, 120, 0.1);
+    display: inline-block;
+    max-width: 100%;
+    width: auto;
+  }
+
+  /* Yebá message with corner accents */
+  .cyber-message-yeba {
+    position: relative;
+    background: rgba(33, 104, 105, 0.2) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(33, 104, 105, 0.6);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 
+      0 0 20px rgba(33, 104, 112, 0.2),
+      inset 0 0 20px rgba(73, 160, 120, 0.05);
+    display: inline-block;
+    max-width: 100%;
+    width: auto;
+  }
+
+  .cyber-message-yeba::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #49A078;
+    border-right: none;
+    border-bottom: none;
+    z-index: 10;
+  }
+
+  .cyber-message-yeba::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #49A078;
+    border-left: none;
+    border-top: none;
+    z-index: 10;
+  }
+
+  /* Glass morphism effect */
+  .cyber-glass {
+    background: rgba(31, 36, 33, 0.7);
+    backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(33, 104, 105, 0.3);
+  }
+
+  /* Scan line effect */
+  .cyber-scanlines::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      transparent 0%,
+      rgba(73, 160, 120, 0.03) 50%,
+      transparent 51%,
+      rgba(73, 160, 120, 0.03) 100%
+    );
+    background-size: 100% 4px;
+    animation: scan 2s linear infinite;
+  }
+
+  @keyframes scan {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 4px; }
+  }
+
+  /* Glitch effect for errors */
+  .cyber-glitch {
+    animation: glitch 0.3s ease-in-out infinite;
+  }
+
+  @keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+  }
+
+  /* Centered placeholder text */
+  .placeholder-centered::placeholder {
+    opacity: 0.7;
+    line-height: 24px; /* Fixed height to center in 56px container with 16px padding top/bottom */
+  }
+
+  /* Strong glow effect for logo button */
+  .logo-super-glow:hover {
+    filter: drop-shadow(0 0 20px #23F0C7) 
+            drop-shadow(0 0 40px #23F0C7) 
+            drop-shadow(0 0 60px #23F0C7) 
+            brightness(1.2) !important;
   }
 }

@@ -238,6 +238,180 @@ message.role === 'user' ? 'bg-black text-white ml-8' : 'bg-gray-100 text-black m
 - Network failures handled with user-friendly error messages
 - TypeScript type safety for message parsing
 
+### 11. Cyberpunk Jungle Aesthetic Transformation
+
+**Overview:**
+Transformed the entire application from a simple black/white interface to a sophisticated "cyberpunk jungle" aesthetic using the Farmaleaf color palette. This comprehensive redesign includes custom styling, typography, animations, and interactive elements while maintaining all existing functionality.
+
+**Farmaleaf Color Palette Implementation:**
+
+```css
+:root {
+  --background: #1F2421;        /* Eerie Black - primary background */
+  --foreground: #EEE5E9;        /* Lavender Blush - primary text */
+  --primary: #216870;           /* Aquamarine - primary accent/buttons */
+  --secondary: #216869;         /* Caribbean Current - secondary accent */
+  --accent: #49A078;            /* Jungle Green - success/highlight accent */
+  /* Additional variables mapped to palette colors */
+}
+```
+
+**Typography Enhancements:**
+
+- Added JetBrains Mono font import in `layout.tsx`
+- Configured monospace fonts for headings and technical elements
+- Applied `cyber-heading` and `cyber-text` utility classes
+- Maintained regular sans-serif fonts for body text readability
+
+**Custom CSS Utility Classes (`globals.css`):**
+
+Created comprehensive utility system including:
+
+```css
+/* Glow effects */
+.cyber-glow-primary     /* Aquamarine glowing borders */
+.cyber-glow-accent      /* Jungle Green accent glows */
+.cyber-border           /* Consistent cyberpunk borders */
+
+/* Gradient backgrounds */
+.cyber-gradient-primary  /* Aquamarine to Caribbean Current */
+.cyber-gradient-accent   /* Jungle Green variations */
+
+/* Interactive animations */
+.cyber-pulse            /* Subtle pulsing effect */
+.cyber-breathe          /* Breathing animation for buttons */
+
+/* Message bubble styles */
+.cyber-message-user     /* User message styling */
+.cyber-message-yeba     /* Assistant message styling */
+.cyber-corners          /* Cyberpunk corner accents (Yebá only) */
+
+/* Visual effects */
+.cyber-glass            /* Glass morphism with backdrop blur */
+.cyber-scanlines        /* Subtle scan line overlay */
+.cyber-scrollbar        /* Custom themed scrollbars */
+```
+
+**Component Styling Updates:**
+
+**Button Component (`button.tsx`):**
+
+- Applied cyberpunk gradients and glow effects to all variants
+- Added breathing animation and hover scale effects
+- Created special `logoButton` variant for send button
+- Integrated monospace typography for technical feel
+
+**Input/Textarea Components:**
+
+- Added backdrop blur and translucent backgrounds
+- Implemented cyan border glows on focus/hover
+- Custom scrollbar styling
+- Enhanced selection colors matching theme
+
+**Card Component (`card.tsx`):**
+
+- Glass morphism effects with backdrop filtering
+- Cyberpunk border styling with subtle glows
+- Hover effects for interactive elements
+
+**Interface Design Overhaul (`page.tsx`):**
+
+**Logo Integration:**
+
+- Replaced text heading with `combination-mark.svg`
+- Applied Jungle Green color filter to SVG
+- Positioned with proper alignment and spacing
+
+**Message System Redesign:**
+
+- User messages: Jungle Green background, right-aligned, Eerie Black text
+- Yebá messages: Caribbean Current background with transparency, left-aligned
+- Removed corner accents from user messages (kept only on Yebá responses)
+- Added Yebá label and timestamps positioned outside bubbles
+- Implemented responsive message bubble sizing
+
+**Input Field Enhancement:**
+
+- Integrated large logo icon as send button (80px visual size)
+- Applied Aquamarine color filter to logo icon
+- Implemented strong glow effect on hover with triple-layered shadows
+- Added Enter key submission (Shift+Enter for new lines)
+- Perfect vertical centering of icon and placeholder text
+- Auto-expanding textarea with proper line height
+
+**Conversation History Improvements:**
+
+- Increased scroll area to 60% viewport height for better message visibility
+- Moved Clear button to conversation area for contextual placement
+- Replaced "Clear" text with Radix Cross1Icon (X icon)
+- Removed horizontal separator line for cleaner appearance
+
+**Advanced Visual Effects:**
+
+**Glow System:**
+
+```css
+/* Triple-layered super glow for logo button */
+.logo-super-glow:hover {
+  filter: drop-shadow(0 0 20px #23F0C7) 
+          drop-shadow(0 0 40px #23F0C7) 
+          drop-shadow(0 0 60px #23F0C7) 
+          brightness(1.2) !important;
+}
+```
+
+**Animation System:**
+
+- Subtle pulsing effects for loading states
+- Breathing animations for interactive elements
+- Smooth transitions (300ms) for all hover effects
+- Scan line effects for atmospheric background
+
+**Accessibility & Functionality Preservation:**
+
+- Maintained all original functionality including:
+  - Real-time conversation with ChatGPT API
+  - localStorage persistence
+  - Auto-scrolling to new messages
+  - Loading states and error handling
+  - Message history limitations for cost control
+- Enhanced keyboard navigation and screen reader compatibility
+- Preserved proper contrast ratios despite dark theme
+- Maintained focus indicators with cyberpunk styling
+
+**Technical Implementation Details:**
+
+**Color Filter System:**
+Applied CSS filters to convert SVG colors to theme palette:
+
+```css
+filter: brightness(0) saturate(100%) invert(70%) sepia(77%) saturate(2494%) hue-rotate(118deg) brightness(94%) contrast(101%);
+```
+
+**Event Handling Improvements:**
+
+- Fixed TypeScript issues with form submission from button clicks
+- Implemented proper event type casting for cross-component compatibility
+- Added Enter key handling with Shift+Enter support for multi-line input
+
+**Responsive Design:**
+
+- Maintained responsive layout across all screen sizes
+- Implemented viewport-relative sizing for conversation history
+- Ensured touch-friendly button sizes and hover states
+
+**Memory Integration:**
+Based on user preferences, corner accents are restricted to Yebá responses only, following the principle that cyberpunk corner accents should be removed from UI components and only appear in Yebá responses from the LLM.
+
+**Dependencies Added:**
+
+```bash
+npm install @radix-ui/react-icons  # For UI icons including Cross1Icon
+```
+
+**Result:**
+Successfully transformed a basic black/white chat interface into a sophisticated cyberpunk jungle-themed application that maintains full functionality while providing an immersive, high-tech organic aesthetic that blends digital cyberpunk elements with natural jungle-inspired curves and colors.
+
 ## Usage Instructions
 
 1. Install dependencies: `npm install`
