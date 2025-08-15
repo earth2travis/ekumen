@@ -80,6 +80,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-background">
+      <head>
+        <meta name="theme-color" content="#1F2421" />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${jetbrainsMono.variable} antialiased`}
       >

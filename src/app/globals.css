@@ -117,8 +117,22 @@
   * {
     @apply border-border outline-ring/50;
   }
+  
+  html {
+    @apply bg-background;
+    /* Ensure full height coverage */
+    height: 100%;
+    /* Prevent white flash on mobile Safari */
+    background-color: var(--background);
+  }
+  
   body {
     @apply bg-background text-foreground;
+    /* Ensure full height coverage */
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+    /* Explicit background color for mobile Safari */
+    background-color: var(--background);
     background-image: 
       radial-gradient(circle at 20% 80%, rgba(73, 160, 120, 0.05) 0%, transparent 50%),
       radial-gradient(circle at 80% 20%, rgba(33, 104, 112, 0.05) 0%, transparent 50%),
