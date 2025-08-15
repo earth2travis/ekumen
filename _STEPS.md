@@ -645,6 +645,146 @@ const openaiMessages = [
 
 This implementation creates a professional, maintainable system for AI character definition that enhances the user experience while following industry best practices for LLM applications.
 
+## 15. SEO and Social Media Optimization
+
+Implemented comprehensive metadata and OpenGraph image support following Next.js best practices for optimal search engine visibility and social media sharing.
+
+### Metadata Implementation
+
+**Updated Root Layout (`src/app/layout.tsx`):**
+
+```typescript
+export const metadata: Metadata = {
+  title: {
+    default: "Farmaleaf | Ancient Wisdom for Modern Healing",
+    template: "%s | Farmaleaf"
+  },
+  description: "Connect with Yebá, the ancient healing spirit, for personalized guidance on natural remedies, traditional medicine, and holistic wellness practices.",
+  metadataBase: new URL("https://farmaleaf.com"),
+  openGraph: {
+    type: "website",
+    locale: "en_US", 
+    url: "https://farmaleaf.com",
+    title: "Farmaleaf | Ancient Wisdom for Modern Healing",
+    description: "Connect with Yebá, the ancient healing spirit, for personalized guidance on natural remedies, traditional medicine, and holistic wellness practices.",
+    siteName: "Farmaleaf",
+    images: [
+      {
+        url: "/images/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Farmaleaf - Ancient Wisdom for Modern Healing",
+      }
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Farmaleaf | Ancient Wisdom for Modern Healing", 
+    description: "Connect with Yebá, the ancient healing spirit, for personalized guidance on natural remedies, traditional medicine, and holistic wellness practices.",
+    images: ["/images/opengraph-image.png"],
+  },
+  icons: {
+    icon: [
+      { url: "/images/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/images/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" }
+    ],
+    apple: [
+      { url: "/images/favicon/apple-touch-icon.png", sizes: "180x180", type: "image/png" }
+    ],
+  },
+  manifest: "/site.webmanifest",
+}
+```
+
+### OpenGraph Image Configuration
+
+**Simple Static Implementation:**
+
+- Used single `opengraph-image.png` file in `/public/images/` for both OpenGraph and Twitter cards
+- Standard social media size: 1200 x 630 pixels
+- Automatically referenced in metadata without requiring dynamic generation
+- Works for all social platforms (Facebook, Twitter, LinkedIn, etc.)
+
+### Favicon Implementation  
+
+**Complete Favicon Suite:**
+
+Created comprehensive favicon configuration supporting all devices and platforms:
+
+```typescript
+icons: {
+  icon: [
+    { url: "/images/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    { url: "/images/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" }
+  ],
+  apple: [
+    { url: "/images/favicon/apple-touch-icon.png", sizes: "180x180", type: "image/png" }
+  ],
+}
+```
+
+**Required Favicon Files:**
+
+Place in `/public/images/favicon/`:
+- `android-chrome-192x192.png`
+- `android-chrome-512x512.png` 
+- `apple-touch-icon.png` (180x180)
+- `favicon-16x16.png`
+- `favicon-32x32.png`
+
+Place `favicon.ico` in `/public/` root directory.
+
+**Web App Manifest (`/public/site.webmanifest`):**
+
+```json
+{
+    "name": "Farmaleaf - Ancient Wisdom for Modern Healing",
+    "short_name": "Farmaleaf",
+    "icons": [
+        {
+            "src": "/images/favicon/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/favicon/android-chrome-512x512.png", 
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone"
+}
+```
+
+### Key Benefits
+
+**SEO Optimization:**
+- Proper page titles with template system for scalability
+- Comprehensive meta descriptions optimized for target keywords
+- Structured metadata following OpenGraph protocol standards
+- Search engine friendly favicon implementation
+
+**Social Media Sharing:**
+- Rich social media previews on Facebook, Twitter, LinkedIn
+- Consistent branding across all social platforms  
+- Proper image sizing for optimal display
+- Platform-specific optimizations (Twitter cards, OpenGraph)
+
+**User Experience:**
+- Professional favicon display across all browsers and devices
+- Progressive Web App support via web manifest
+- Consistent branding in browser tabs, bookmarks, and shortcuts
+
+**Technical Implementation:**
+- Follows Next.js metadata best practices
+- Simple static image approach for maintainability
+- Proper TypeScript integration
+- Clean separation of concerns
+
+This implementation ensures Farmaleaf has optimal visibility in search results and provides rich, professional previews when shared on social media platforms.
+
 ## Usage Instructions
 
 1. Install dependencies: `npm install`
