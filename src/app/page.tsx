@@ -17,7 +17,10 @@ export default function Home() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isMultiline, setIsMultiline] = useState(false);
+  const [textareaHeight, setTextareaHeight] = useState(56);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Load conversation from localStorage on mount
   useEffect(() => {
@@ -51,6 +54,18 @@ export default function Home() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  // Simple auto-resize function
+  const autoResize = () => {
+    if (!textareaRef.current) return;
+
+    textareaRef.current.style.height = "auto";
+    const scrollHeight = textareaRef.current.scrollHeight;
+    const isMulti = scrollHeight > 56;
+
+    setIsMultiline(isMulti);
+    textareaRef.current.style.height = scrollHeight + (isMulti ? 60 : 0) + "px";
+  };
+
   // Limit conversation to last 20 messages (10 exchanges) for cost control
   const limitMessages = (msgs: Message[]): Message[] => {
     if (msgs.length > 20) {
@@ -73,6 +88,8 @@ export default function Home() {
     const updatedMessages = limitMessages([...messages, userMessage]);
     setMessages(updatedMessages);
     setInput(""); // Clear input immediately
+    setIsMultiline(false); // Reset multiline state
+    setTextareaHeight(56); // Reset textarea height
     setIsLoading(true);
 
     try {
@@ -115,6 +132,8 @@ export default function Home() {
   const handleClear = () => {
     setInput("");
     setMessages([]);
+    setIsMultiline(false);
+    setTextareaHeight(56);
     localStorage.removeItem("farmaleaf-conversation");
   };
 
@@ -209,8 +228,13 @@ export default function Home() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="relative">
                 <Textarea
+                  ref={textareaRef}
                   value={input}
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={(e) => {
+                    setInput(e.target.value);
+                    autoResize();
+                  }}
+                  onInput={autoResize}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && !e.shiftKey) {
                       e.preventDefault();
@@ -221,19 +245,37 @@ export default function Home() {
                     }
                   }}
                   placeholder="Tell Yebá what ails you..."
-                  className="min-h-[56px] max-h-[200px] pr-12 resize-none flex items-center placeholder-centered"
+                  className="resize-none placeholder-centered"
                   style={{
                     paddingTop: "16px",
-                    paddingBottom: "16px",
-                    lineHeight: "1.3",
-                    display: "flex",
-                    alignItems: "center",
+                    paddingBottom: isMultiline ? "80px" : "16px",
+                    paddingRight: isMultiline ? "16px" : "80px",
+                    paddingLeft: "16px",
+                    lineHeight: "1.5",
+                    minHeight: "56px",
+                    maxHeight: "200px",
+                    overflow: "hidden",
+                    resize: "none",
                   }}
                   disabled={isLoading}
                   rows={1}
                 />
 
-                <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center justify-center">
+                <div
+                  className="absolute transition-all duration-300"
+                  style={
+                    isMultiline
+                      ? {
+                          bottom: "16px",
+                          right: "16px",
+                        }
+                      : {
+                          top: "50%",
+                          right: "8px",
+                          transform: "translateY(-50%)",
+                        }
+                  }
+                >
                   <Button
                     type="button"
                     onClick={(e) => {

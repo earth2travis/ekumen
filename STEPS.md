@@ -412,6 +412,42 @@ npm install @radix-ui/react-icons  # For UI icons including Cross1Icon
 **Result:**
 Successfully transformed a basic black/white chat interface into a sophisticated cyberpunk jungle-themed application that maintains full functionality while providing an immersive, high-tech organic aesthetic that blends digital cyberpunk elements with natural jungle-inspired curves and colors.
 
+## 12. Enhanced Multiline Input with Dynamic Button Positioning
+
+The chat interface now features an intelligent auto-resizing textarea with dynamic button positioning to improve the user experience for both single-line and multiline text input.
+
+### Features Implemented
+
+**Auto-Resizing Textarea:**
+
+- Automatically expands height to fit content as user types
+- Shrinks back down when text is deleted
+- Starts at 56px minimum height for single-line input
+- Maximum height of 200px with overflow handling for very long content
+- No scrollbars - uses natural expansion instead
+
+**Dynamic Button Positioning:**
+
+- Single-line mode: Send button positioned center-right within textarea
+- Multiline mode: Send button moves to bottom-right corner below text content
+- Smooth transitions between positioning modes
+- Button always stays within textarea boundaries
+
+**Smart Multiline Detection:**
+
+- Detects multiline content based on actual content height and line breaks
+- Automatically switches modes when content requires multiple lines
+- Proper padding adjustments to prevent text overlap with button
+
+**Implementation Details:**
+
+- Simple `autoResize()` function that sets height to 'auto' and measures `scrollHeight`
+- Called on both `onChange` and `onInput` events for real-time responsiveness
+- Uses CSS positioning with conditional `bottom` vs `top` positioning for button
+- Maintains proper padding: 80px bottom padding in multiline mode for button space
+
+This enhancement provides a modern, responsive input experience similar to popular chat applications while maintaining the application's unique design aesthetic.
+
 ## Usage Instructions
 
 1. Install dependencies: `npm install`
@@ -460,3 +496,15 @@ The application includes comprehensive error handling for:
 - OpenAI API errors
 - Invalid requests
 - Rate limiting
+
+feat: implement auto-resizing multiline textarea with dynamic button positioning
+
+- Add auto-expanding textarea that grows/shrinks based on content
+- Implement dynamic button positioning (center-right for single line, bottom-right for multiline)
+- Add multiline detection based on content height and line breaks
+- Create smooth transitions between single-line and multiline modes
+- Ensure button stays within textarea boundaries at all times
+- Add proper padding adjustments to prevent text overlap with button
+- Implement real-time resize on text input/deletion
+- Remove scrollbars in favor of natural textarea expansion
+- Set max height limit with overflow handling for very long content
