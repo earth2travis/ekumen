@@ -4,8 +4,10 @@ import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
+import { Header } from "@/components/Header";
 import Image from "next/image";
 import { Cross1Icon } from "@radix-ui/react-icons";
+import ReactMarkdown from "react-markdown";
 
 interface Message {
   role: "user" | "assistant";
@@ -23,7 +25,7 @@ export default function Home() {
 
   // Load conversation from localStorage on mount
   useEffect(() => {
-    const savedMessages = localStorage.getItem("farmaleaf-conversation");
+    const savedMessages = localStorage.getItem("ekumen-conversation");
     if (savedMessages) {
       try {
         const parsed = JSON.parse(savedMessages);
@@ -44,7 +46,7 @@ export default function Home() {
   // Save conversation to localStorage whenever messages change
   useEffect(() => {
     if (messages.length > 0) {
-      localStorage.setItem("farmaleaf-conversation", JSON.stringify(messages));
+      localStorage.setItem("ekumen-conversation", JSON.stringify(messages));
     }
   }, [messages]);
 
@@ -65,7 +67,7 @@ export default function Home() {
     const isMulti = scrollHeight > 56;
 
     setIsMultiline(isMulti);
-    textareaRef.current.style.height = scrollHeight + (isMulti ? 60 : 0) + "px";
+    textareaRef.current.style.height = scrollHeight + (isMulti ? 48 : 0) + "px";
   };
 
   // Limit conversation to last 20 messages (10 exchanges) for cost control
@@ -140,20 +142,13 @@ export default function Home() {
     setInput("");
     setMessages([]);
     setIsMultiline(false);
-    localStorage.removeItem("farmaleaf-conversation");
+    localStorage.removeItem("ekumen-conversation");
   };
 
   return (
     <div className="min-h-screen bg-background text-foreground p-4 cyber-scanlines">
       <div className="max-w-2xl mx-auto space-y-6">
-        <div className="flex justify-start mb-8 pt-4">
-          <Image
-            src="/images/combination-mark.svg"
-            alt="Farmaleaf"
-            width={200}
-            height={80}
-          />
-        </div>
+        <Header />
 
         {/* Conversation History */}
         {messages.length > 0 && (
@@ -167,9 +162,9 @@ export default function Home() {
                   }`}
                 >
                   {message.role === "assistant" && (
-                    <div className="flex justify-start items-center gap-2 mb-1">
+                    <div className="flex justify-start items-center gap-2 mb-2">
                       <span className="text-sm font-semibold cyber-heading text-xs">
-                        Yebá
+                        Genly
                       </span>
                       <span className="text-xs opacity-70 font-mono">
                         {message.timestamp.toLocaleTimeString([], {
@@ -184,32 +179,32 @@ export default function Home() {
                     className={`${
                       message.role === "user"
                         ? "cyber-message-user"
-                        : "cyber-message-yeba cyber-glass"
+                        : "cyber-message-genly cyber-glass"
                     }`}
                   >
-                    <pre
-                      className={`whitespace-pre-wrap text-sm ${
-                        message.role === "user"
-                          ? "text-right text-background"
-                          : "cyber-text"
-                      }`}
-                    >
-                      {message.content}
-                    </pre>
+                    {message.role === "user" ? (
+                      <pre className="whitespace-pre-wrap text-sm text-right text-background">
+                        {message.content}
+                      </pre>
+                    ) : (
+                      <div className="text-sm cyber-text pt-3 pl-3 pb-3">
+                        <ReactMarkdown>{message.content}</ReactMarkdown>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
               {isLoading && (
                 <div className="mr-8">
-                  <div className="flex justify-start items-center gap-2 mb-1">
+                  <div className="flex justify-start items-center gap-2 mb-2">
                     <span className="text-sm font-semibold cyber-heading text-xs">
-                      Yebá
+                      Genly
                     </span>
                   </div>
-                  <div className="cyber-message-yeba cyber-glass cyber-pulse">
-                    <pre className="whitespace-pre-wrap text-sm cyber-text">
-                      Searching through the ancient wisdom...
-                    </pre>
+                  <div className="cyber-message-genly cyber-glass cyber-pulse">
+                    <div className="text-sm cyber-text pt-3 pl-3 pb-3">
+                      Observing the patterns...
+                    </div>
                   </div>
                 </div>
               )}
@@ -250,12 +245,12 @@ export default function Home() {
                       }
                     }
                   }}
-                  placeholder="Tell Yebá what ails you..."
+                  placeholder="What are you trying to see?"
                   className="resize-none placeholder-centered"
                   style={{
                     paddingTop: "16px",
-                    paddingBottom: isMultiline ? "80px" : "16px",
-                    paddingRight: isMultiline ? "16px" : "80px",
+                    paddingBottom: isMultiline ? "64px" : "16px",
+                    paddingRight: isMultiline ? "16px" : "64px",
                     paddingLeft: "16px",
                     lineHeight: "1.5",
                     minHeight: "56px",
@@ -286,14 +281,14 @@ export default function Home() {
                     disabled={isLoading || !input.trim()}
                     variant="logoButton"
                     size="icon"
-                    className="h-16 w-16 flex items-center justify-center logo-super-glow transition-all duration-300"
+                    className="h-12 w-12 flex items-center justify-center logo-super-glow transition-all duration-300"
                   >
                     <Image
                       src="/images/logo.svg"
                       alt="Send"
-                      width={88}
-                      height={88}
-                      className="w-20 h-20"
+                      width={60}
+                      height={60}
+                      className="w-14 h-14"
                       style={{
                         filter:
                           "brightness(0) saturate(100%) invert(70%) sepia(77%) saturate(2494%) hue-rotate(118deg) brightness(94%) contrast(101%)",

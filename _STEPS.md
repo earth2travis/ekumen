@@ -16,7 +16,7 @@ Next.js application with shadcn/ui components and Tailwind CSS featuring a simpl
 ## Structure
 
 ```
-farmaleaf/
+ekumen/
  src/
     app/
        globals.css           # Tailwind + shadcn styles
@@ -241,9 +241,9 @@ message.role === 'user' ? 'bg-black text-white ml-8' : 'bg-gray-100 text-black m
 ### 11. Cyberpunk Jungle Aesthetic Transformation
 
 **Overview:**
-Transformed the entire application from a simple black/white interface to a sophisticated "cyberpunk jungle" aesthetic using the Farmaleaf color palette. This comprehensive redesign includes custom styling, typography, animations, and interactive elements while maintaining all existing functionality.
+Transformed the entire application from a simple black/white interface to a sophisticated "cyberpunk jungle" aesthetic using the Ekumen color palette. This comprehensive redesign includes custom styling, typography, animations, and interactive elements while maintaining all existing functionality.
 
-**Farmaleaf Color Palette Implementation:**
+**Ekumen Color Palette Implementation:**
 
 ```css
 :root {
@@ -283,8 +283,8 @@ Created comprehensive utility system including:
 
 /* Message bubble styles */
 .cyber-message-user     /* User message styling */
-.cyber-message-yeba     /* Assistant message styling */
-.cyber-corners          /* Cyberpunk corner accents (Yebá only) */
+.cyber-message-genly     /* Assistant message styling */
+.cyber-corners          /* Cyberpunk corner accents (Genly only) */
 
 /* Visual effects */
 .cyber-glass            /* Glass morphism with backdrop blur */
@@ -656,44 +656,59 @@ Implemented comprehensive metadata and OpenGraph image support following Next.js
 ```typescript
 export const metadata: Metadata = {
   title: {
-    default: "Farmaleaf | Ancient Wisdom for Modern Healing",
-    template: "%s | Farmaleaf"
+    default: "Ekumen | Customer Understanding Through Patient Inquiry",
+    template: "%s | Ekumen",
   },
-  description: "Connect with Yebá, the ancient healing spirit, for personalized guidance on natural remedies, traditional medicine, and holistic wellness practices.",
-  metadataBase: new URL("https://farmaleaf.com"),
+  description:
+    "Connect with Genly, your AI envoy for customer discovery. Get guidance on interview techniques, insight extraction, and understanding customers as they truly are.",
+  metadataBase: new URL("https://ekumen-chat.vercel.app"),
   openGraph: {
     type: "website",
-    locale: "en_US", 
-    url: "https://farmaleaf.com",
-    title: "Farmaleaf | Ancient Wisdom for Modern Healing",
-    description: "Connect with Yebá, the ancient healing spirit, for personalized guidance on natural remedies, traditional medicine, and holistic wellness practices.",
-    siteName: "Farmaleaf",
+    locale: "en_US",
+    url: "https://ekumen-chat.vercel.app",
+    title: "Ekumen | Customer Understanding Through Patient Inquiry",
+    description:
+      "Connect with Genly, your AI envoy for customer discovery. Get guidance on interview techniques, insight extraction, and understanding customers as they truly are.",
+    siteName: "Ekumen",
     images: [
       {
         url: "/images/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "Farmaleaf - Ancient Wisdom for Modern Healing",
-      }
+        alt: "Ekumen - Customer Understanding Through Patient Inquiry",
+      },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Farmaleaf | Ancient Wisdom for Modern Healing", 
-    description: "Connect with Yebá, the ancient healing spirit, for personalized guidance on natural remedies, traditional medicine, and holistic wellness practices.",
+    title: "Ekumen | Customer Understanding Through Patient Inquiry",
+    description:
+      "Connect with Genly, your AI envoy for customer discovery. Get guidance on interview techniques, insight extraction, and understanding customers as they truly are.",
     images: ["/images/opengraph-image.png"],
   },
   icons: {
     icon: [
-      { url: "/images/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/images/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" }
+      {
+        url: "/images/favicon/favicon-16x16.png",
+        sizes: "16x16",
+        type: "image/png",
+      },
+      {
+        url: "/images/favicon/favicon-32x32.png",
+        sizes: "32x32",
+        type: "image/png",
+      },
     ],
     apple: [
-      { url: "/images/favicon/apple-touch-icon.png", sizes: "180x180", type: "image/png" }
+      {
+        url: "/images/favicon/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
     ],
   },
   manifest: "/site.webmanifest",
-}
+};
 ```
 
 ### OpenGraph Image Configuration
@@ -739,8 +754,8 @@ Place `favicon.ico` in `/public/` root directory.
 
 ```json
 {
-    "name": "Farmaleaf - Ancient Wisdom for Modern Healing",
-    "short_name": "Farmaleaf",
+    "name": "Ekumen - Customer Understanding Through Patient Inquiry",
+    "short_name": "Ekumen",
     "icons": [
         {
             "src": "/images/favicon/android-chrome-192x192.png",
@@ -748,7 +763,7 @@ Place `favicon.ico` in `/public/` root directory.
             "type": "image/png"
         },
         {
-            "src": "/images/favicon/android-chrome-512x512.png", 
+            "src": "/images/favicon/android-chrome-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
         }
@@ -788,7 +803,143 @@ Place `favicon.ico` in `/public/` root directory.
 - Proper TypeScript integration
 - Clean separation of concerns
 
-This implementation ensures Farmaleaf has optimal visibility in search results and provides rich, professional previews when shared on social media platforms.
+This implementation ensures Ekumen has optimal visibility in search results and provides rich, professional previews when shared on social media platforms.
+
+## 16. Reusable Header Component Implementation
+
+Refactored the navigation header into a reusable component following React best practices and the DRY (Don't Repeat Yourself) principle. This creates a single source of truth for navigation across all pages.
+
+### Problem Addressed
+
+**Initial Implementation:**
+
+- Header markup duplicated in both `page.tsx` (home) and `about/page.tsx`
+- Logo was not clickable on the home page
+- Logo only linked to home on the About page
+- Any header changes would require updates in multiple files
+- Inconsistent navigation experience across pages
+
+### Component Architecture
+
+**Created Reusable Component (`src/components/Header.tsx`):**
+
+```typescript
+import Image from "next/image";
+import Link from "next/link";
+
+export function Header() {
+  return (
+    <div className="flex justify-between items-center mb-8 pt-4">
+      <Link href="/">
+        <Image
+          src="/images/combination-mark.svg"
+          alt="Ekumen"
+          width={200}
+          height={80}
+        />
+      </Link>
+      <Link
+        href="/about"
+        className="cyber-heading hover:opacity-80 transition-opacity"
+      >
+        About
+      </Link>
+    </div>
+  );
+}
+```
+
+**Key Features:**
+
+- **Clickable Logo**: Wrapped in Next.js `Link` component for navigation to home page
+- **About Link**: Right-aligned navigation using existing `cyber-heading` styles
+- **Consistent Layout**: Uses `justify-between` and `items-center` for proper spacing and vertical alignment
+- **Theme Integration**: Leverages existing cyberpunk jungle aesthetic classes
+
+### Implementation Updates
+
+**Updated Home Page (`src/app/page.tsx`):**
+
+- Replaced inline header markup with `<Header />` component
+- Removed duplicate `Link` import (no longer needed)
+- Maintained all existing chat functionality
+
+**Updated About Page (`src/app/about/page.tsx`):**
+
+- Replaced inline header markup with `<Header />` component
+- Removed `Image` import (no longer needed directly)
+- Maintained all existing content
+
+### Technical Benefits
+
+**Code Quality:**
+
+- **DRY Principle**: Single component used across multiple pages
+- **Maintainability**: Header changes only need to be made in one file
+- **Consistency**: Guaranteed identical header experience across all pages
+- **Simplicity**: Clean, focused component with single responsibility
+
+**User Experience Improvements:**
+
+- **Bi-directional Navigation**: Logo now provides home navigation from all pages
+- **Visual Consistency**: Identical header layout and styling everywhere
+- **Intuitive UX**: Logo click-to-home follows web conventions
+- **Smooth Transitions**: Hover states provide clear interactive feedback
+
+**TypeScript Integration:**
+
+- Proper type safety with Next.js `Link` and `Image` components
+- No additional type definitions required
+- Full IDE autocomplete and error checking support
+
+### Navigation Structure
+
+**Current Navigation System:**
+
+```text
+Header Component:
+├── Logo (Left) → Links to home page (/)
+└── About Link (Right) → Links to about page (/about)
+
+Additional Navigation:
+└── About Page: "Back to chat" link in footer → Links to home page
+```
+
+**Design Decisions:**
+
+- Used Next.js built-in `Link` component (no shadcn component needed)
+- Maintained existing `cyber-heading` styling for consistent theme
+- Applied simple opacity transition for hover feedback
+- No additional dependencies or complex navigation libraries required
+
+### File Structure Update
+
+```text
+src/
+  components/
+    Header.tsx              # New reusable header component
+    ui/                     # shadcn components
+      button.tsx
+      card.tsx
+      input.tsx
+      textarea.tsx
+  app/
+    page.tsx               # Uses <Header /> component
+    about/
+      page.tsx             # Uses <Header /> component
+```
+
+### Scalability
+
+This component-based approach provides a foundation for future enhancements:
+
+- Easy to add more navigation links (e.g., Documentation, Contact)
+- Simple to implement mobile-responsive navigation menu
+- Straightforward to add authentication-based navigation elements
+- Ready for route highlighting/active state styling
+- Prepared for global navigation state management if needed
+
+This implementation follows the principle of creating the simplest, most elegant solution while maintaining consistency with the existing Next.js 15 and TypeScript architecture.
 
 ## Usage Instructions
 

@@ -1,16 +1,16 @@
-# Farmaleaf 🌿
+# Ekumen 🌍
 
-**An immersive cyberpunk jungle chat interface powered by AI plant wisdom.**
+**An AI-powered customer development interface inspired by Ursula K. Le Guin's vision of deep cultural understanding.**
 
-Farmaleaf is a sophisticated Next.js web application that combines cutting-edge AI technology with an ancient shamanic spirit named Yebá. Experience conversations about plant medicine, healing wisdom, and botanical knowledge through a beautifully designed cyberpunk jungle interface.
+Ekumen is a sophisticated Next.js web application that combines cutting-edge AI technology with the philosophy of patient, respectful inquiry. Experience conversations about customer discovery, insight extraction, and anthropological understanding through an interface guided by Genly, your AI envoy to the world of your customers.
 
 ## Features
 
-- **🧠 AI-Powered Conversations**: Real-time chat with ChatGPT integration featuring Yebá, an ancient plant wisdom guide
-- **🎨 Cyberpunk Jungle Design**: Immersive aesthetic blending high-tech cyberpunk elements with organic jungle themes
+- **🧠 AI-Powered Conversations**: Real-time chat with ChatGPT integration featuring Genly, your guide for customer understanding
+- **🎨 Thoughtful Design**: Clean, focused aesthetic that keeps customer insights at the center
 - **💬 Persistent Chat History**: Conversations automatically save and restore across browser sessions
 - **📱 Responsive Design**: Seamless experience across desktop and mobile devices with adaptive input controls
-- **🌱 Plant Wisdom Focus**: Specialized knowledge about medicinal plants, traditional healing, and sustainable practices
+- **🔍 Customer Discovery Focus**: Specialized guidance for interviews, insight extraction, and pattern recognition
 
 ## Quick Start
 
@@ -34,9 +34,9 @@ Farmaleaf is a sophisticated Next.js web application that combines cutting-edge 
    npm run dev
    ```
 
-4. **Start chatting**
+4. **Start discovering**
    - Open [http://localhost:3000](http://localhost:3000)
-   - Ask Yebá about plants, healing, or traditional medicine
+   - Ask Genly about interview strategies, insight patterns, or customer understanding
    - Your conversation history will automatically persist
 
 ## Built With
@@ -49,20 +49,21 @@ Farmaleaf is a sophisticated Next.js web application that combines cutting-edge 
 
 ## What Makes It Special
 
-**Yebá Character**: More than just a chatbot - Yebá is an ancient shamanic spirit with deep knowledge of:
+**Genly Character**: More than just a chatbot - Genly is your Mobile envoy to customer understanding, with deep knowledge of:
 
-- Medicinal plants and their healing properties
-- Traditional preparation methods and dosages
-- Spiritual and ceremonial uses of plants
-- Sustainable harvesting practices
-- Integration of ancient wisdom with modern wellness
+- Customer interview methodologies and questioning techniques
+- Pattern recognition across customer conversations
+- Translating between customer language and product implications
+- Identifying assumptions and testing hypotheses
+- Balancing empathy with analytical rigor
 
-**Cyberpunk Jungle Aesthetic**: A unique visual experience featuring:
+**Philosophy of Understanding**: A unique approach inspired by Le Guin's Ekumen:
 
-- Custom color palette inspired by jungle greens and cyberpunk cyans
-- Glowing effects, glass morphism, and subtle animations
-- Auto-resizing multiline input with dynamic button positioning
-- Mobile-optimized responsive design
+- Patient, non-judgmental inquiry
+- Cultural humility in approaching customer worldviews
+- Deep listening before drawing conclusions
+- Respect for customers as complex, whole people
+- Building understanding through systematic observation
 
 **Smart Architecture**: Clean, maintainable codebase with:
 
@@ -71,14 +72,17 @@ Farmaleaf is a sophisticated Next.js web application that combines cutting-edge 
 - Comprehensive error handling and fallbacks
 - TypeScript throughout for reliability
 
-## About Yebá
+## About Genly
 
-Yebá embodies thousands of years of indigenous Amazon knowledge about plant medicine. The AI guide provides:
+Genly embodies the patient, respectful inquiry of Le Guin's Ekumen envoys. The AI guide provides:
 
-- Safe, respectful guidance on medicinal plants
-- Balance between spiritual wisdom and practical advice
-- Emphasis on sustainable and ethical practices
-- Connection between ancient traditions and modern wellness
+- Structured approaches to customer discovery
+- Help identifying patterns and extracting insights
+- Balance between empathy and analytical thinking
+- Guidance on avoiding common interview pitfalls
+- Connection between individual conversations and broader understanding
+
+Named after Genly Ai, the protagonist of *The Left Hand of Darkness*, who spent years learning to truly understand an alien culture through patient observation and humble inquiry.
 
 ## License
 
@@ -86,4 +90,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-*Experience the wisdom of the jungle through the lens of tomorrow.*
+*Understanding customers as they truly are, not as we assume them to be.*

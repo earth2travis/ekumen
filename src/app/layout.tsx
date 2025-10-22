@@ -19,34 +19,34 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Farmaleaf | Ancient Wisdom for Modern Healing",
-    template: "%s | Farmaleaf",
+    default: "Ekumen | Customer Understanding Through Patient Inquiry",
+    template: "%s | Ekumen",
   },
   description:
-    "Connect with Yebá, the ancient healing spirit, for personalized guidance on natural remedies, traditional medicine, and holistic wellness practices.",
-  metadataBase: new URL("https://farmaleaf-chat.vercel.app"),
+    "Connect with Genly, your AI envoy for customer discovery. Get guidance on interview techniques, insight extraction, and understanding customers as they truly are.",
+  metadataBase: new URL("https://ekumen-chat.vercel.app"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://farmaleaf-chat.vercel.app",
-    title: "Farmaleaf | Ancient Wisdom for Modern Healing",
+    url: "https://ekumen-chat.vercel.app",
+    title: "Ekumen | Customer Understanding Through Patient Inquiry",
     description:
-      "Connect with Yebá, the ancient healing spirit, for personalized guidance on natural remedies, traditional medicine, and holistic wellness practices.",
-    siteName: "Farmaleaf",
+      "Connect with Genly, your AI envoy for customer discovery. Get guidance on interview techniques, insight extraction, and understanding customers as they truly are.",
+    siteName: "Ekumen",
     images: [
       {
         url: "/images/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "Farmaleaf - Ancient Wisdom for Modern Healing",
+        alt: "Ekumen - Customer Understanding Through Patient Inquiry",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Farmaleaf | Ancient Wisdom for Modern Healing",
+    title: "Ekumen | Customer Understanding Through Patient Inquiry",
     description:
-      "Connect with Yebá, the ancient healing spirit, for personalized guidance on natural remedies, traditional medicine, and holistic wellness practices.",
+      "Connect with Genly, your AI envoy for customer discovery. Get guidance on interview techniques, insight extraction, and understanding customers as they truly are.",
     images: ["/images/opengraph-image.png"],
   },
   icons: {

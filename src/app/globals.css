@@ -251,6 +251,31 @@
     text-shadow: 0 0 5px rgba(238, 229, 233, 0.3);
   }
 
+  /* Markdown content styling */
+  .cyber-text p {
+    margin-bottom: 1rem;
+  }
+
+  .cyber-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .cyber-text strong {
+    font-weight: 600;
+    color: #49A078;
+  }
+
+  .cyber-text ol,
+  .cyber-text ul {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .cyber-text li {
+    margin-bottom: 0.25rem;
+  }
+
   /* Message bubble styles */
   .cyber-message {
     position: relative;
@@ -279,8 +304,8 @@
     width: auto;
   }
 
-  /* Yebá message with corner accents */
-  .cyber-message-yeba {
+  /* Genly message with corner accents */
+  .cyber-message-genly {
     position: relative;
     background: rgba(33, 104, 105, 0.2) !important;
     backdrop-filter: blur(10px);
@@ -295,7 +320,7 @@
     width: auto;
   }
 
-  .cyber-message-yeba::before {
+  .cyber-message-genly::before {
     content: '';
     position: absolute;
     top: 8px;
@@ -308,7 +333,7 @@
     z-index: 10;
   }
 
-  .cyber-message-yeba::after {
+  .cyber-message-genly::after {
     content: '';
     position: absolute;
     bottom: 8px;
