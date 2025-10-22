@@ -1,5 +1,7 @@
 # Todo
 
+- Fix unfurls
+- Build docs
 - Clean code
 - Write tests
 - Evaluate error handling
