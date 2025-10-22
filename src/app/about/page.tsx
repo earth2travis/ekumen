@@ -1,6 +1,23 @@
+import { Metadata } from "next";
 import { Card, CardContent } from "@/components/ui/card";
 import { Header } from "@/components/Header";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "About Ekumen",
+  description:
+    "Learn about the philosophy behind anthropological customer research.",
+  openGraph: {
+    title: "About Ekumen | Customer Understanding Through Patient Inquiry",
+    description:
+      "Learn about the philosophy behind anthropological customer research.",
+  },
+  twitter: {
+    title: "About Ekumen | Customer Understanding Through Patient Inquiry",
+    description:
+      "Learn about the philosophy behind anthropological customer research.",
+  },
+};
 
 export default function About() {
   return (

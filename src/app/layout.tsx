@@ -24,11 +24,11 @@ export const metadata: Metadata = {
   },
   description:
     "Connect with Genly, your AI envoy for customer discovery. Get guidance on interview techniques, insight extraction, and understanding customers as they truly are.",
-  metadataBase: new URL("https://ekumen-chat.vercel.app"),
+  metadataBase: new URL("https://ekumen-genly.vercel.app"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://ekumen-chat.vercel.app",
+    url: "https://ekumen-genly.vercel.app",
     title: "Ekumen | Customer Understanding Through Patient Inquiry",
     description:
       "Connect with Genly, your AI envoy for customer discovery. Get guidance on interview techniques, insight extraction, and understanding customers as they truly are.",
