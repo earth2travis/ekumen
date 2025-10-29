@@ -6,6 +6,7 @@ import "reveal.js/dist/theme/black.css";
 
 export default function InvestigationOnePage() {
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let deck: any = null;
 
     const initReveal = async () => {
@@ -15,7 +16,7 @@ export default function InvestigationOnePage() {
       const Reveal = (await import("reveal.js")).default;
 
       // Check if reveal container exists
-      const revealDiv = document.querySelector(".reveal");
+      const revealDiv = document.querySelector(".reveal") as HTMLElement;
       if (!revealDiv) {
         console.error("Reveal container not found");
         return;
@@ -318,8 +319,8 @@ export default function InvestigationOnePage() {
                 collaboration
               </p>
               <blockquote>
-                "Weeks go by before we have to face that decision again, and
-                we're like, <em>what did we say?</em>"
+                &ldquo;Weeks go by before we have to face that decision again,
+                and we&rsquo;re like, <em>what did we say?</em>&rdquo;
               </blockquote>
             </div>
           </section>
@@ -336,9 +337,9 @@ export default function InvestigationOnePage() {
                 context)
               </p>
               <blockquote>
-                "Richard works with ChatGPT and he has all his massive
-                context...I'm at ChatGPT zero. Instead of going 10x faster,{" "}
-                <em>we are actually going slower.</em>"
+                &ldquo;Richard works with ChatGPT and he has all his massive
+                context...I&rsquo;m at ChatGPT zero. Instead of going 10x
+                faster, <em>we are actually going slower.</em>&rdquo;
               </blockquote>
             </div>
           </section>
@@ -352,9 +353,9 @@ export default function InvestigationOnePage() {
               </p>
               <p>Works with 2 organizations building AI-native workflows</p>
               <blockquote>
-                "Everybody's taking notes in their own way...things worded
-                slightly differently...that's <em>catastrophic</em> when trying
-                to build these processes."
+                &ldquo;Everybody&rsquo;s taking notes in their own way...things
+                worded slightly differently...that&rsquo;s <em>catastrophic</em>{" "}
+                when trying to build these processes.&rdquo;
               </blockquote>
             </div>
           </section>
@@ -401,9 +402,10 @@ export default function InvestigationOnePage() {
           <section>
             <h2>Problem Validation</h2>
             <blockquote>
-              "Everyone has their own AI notetaker...I don't get those
-              transcripts. We're all having the same meetings...but creating{" "}
-              <em>multiple parallel realities</em> of the same conversations."
+              &ldquo;Everyone has their own AI notetaker...I don&rsquo;t get
+              those transcripts. We&rsquo;re all having the same meetings...but
+              creating <em>multiple parallel realities</em> of the same
+              conversations.&rdquo;
               <br />
               <br />— Nicolaus Sherrill
             </blockquote>
@@ -419,7 +421,7 @@ export default function InvestigationOnePage() {
             <p>
               <strong>2. Partner Context Silos</strong> (4/10)
             </p>
-            <p>Even 2-person teams can't share AI knowledge</p>
+            <p>Even 2-person teams can&rsquo;t share AI knowledge</p>
             <p>
               <strong>3. Decision Recovery</strong> (5/10)
             </p>
@@ -430,9 +432,9 @@ export default function InvestigationOnePage() {
             <h2>The Real Problem Is...</h2>
             <div className="big-text">
               <blockquote>
-                "Instead of using a super powerful tool to go 10x faster, we are
-                actually going slower...because of all the{" "}
-                <em>context reconstruction.</em>"
+                &ldquo;Instead of using a super powerful tool to go 10x faster,
+                we are actually going slower...because of all the{" "}
+                <em>context reconstruction.</em>&rdquo;
                 <br />
                 <br />— Abel Osorio
               </blockquote>
@@ -507,8 +509,8 @@ export default function InvestigationOnePage() {
           <section>
             <h2>Workarounds We Saw</h2>
             <blockquote>
-              "I have a formal Q4 key result to reset our collaborative
-              workspaces and tools."
+              &ldquo;I have a formal Q4 key result to reset our collaborative
+              workspaces and tools.&rdquo;
               <br />
               <br />— Nicolaus (budget allocated, active timeline)
             </blockquote>
@@ -516,7 +518,7 @@ export default function InvestigationOnePage() {
               <strong>High-effort solutions:</strong>
             </p>
             <ul>
-              <li>Richard: 20+ custom GPTs (can't share them)</li>
+              <li>Richard: 20+ custom GPTs (can&rsquo;t share them)</li>
               <li>Willy: Documented AI patterns extensively</li>
               <li>JP: LLMs.txt files, GitHub actions, 90-min workshops</li>
             </ul>
@@ -547,8 +549,10 @@ export default function InvestigationOnePage() {
                 case validated across primary segment
               </li>
               <li>
-                <strong>Position as "Stop Rebuilding Context"</strong> — Lead
-                with time savings, not collaboration features
+                <strong>
+                  Position as &ldquo;Stop Rebuilding Context&rdquo;
+                </strong>{" "}
+                — Lead with time savings, not collaboration features
               </li>
               <li>
                 <strong>Target 4-7 person AI-forward teams</strong> — Not 10-15
@@ -563,7 +567,7 @@ export default function InvestigationOnePage() {
             <ol start={4}>
               <li>
                 <strong>Focus on automatic context sharing</strong> — Between
-                team members' AI sessions (zero setup)
+                team members&rsquo; AI sessions (zero setup)
               </li>
               <li>
                 <strong>Secondary: Marketing agencies</strong> — Channel
@@ -594,12 +598,12 @@ export default function InvestigationOnePage() {
           <section>
             <h2>Key Quotes (1/2)</h2>
             <blockquote>
-              "What did we say?"
+              &ldquo;What did we say?&rdquo;
               <br />
               <br />— Nicolaus, on decision recovery
             </blockquote>
             <blockquote>
-              "We are actually going slower."
+              &ldquo;We are actually going slower.&rdquo;
               <br />
               <br />— Abel, on the AI paradox
             </blockquote>
@@ -608,12 +612,13 @@ export default function InvestigationOnePage() {
           <section>
             <h2>Key Quotes (2/2)</h2>
             <blockquote>
-              "Multiple parallel realities of the same conversations."
+              &ldquo;Multiple parallel realities of the same
+              conversations.&rdquo;
               <br />
               <br />— Nicolaus, on fragmentation
             </blockquote>
             <blockquote>
-              "That's catastrophic when building processes."
+              &ldquo;That&rsquo;s catastrophic when building processes.&rdquo;
               <br />
               <br />— JP, on divergent notes
             </blockquote>
